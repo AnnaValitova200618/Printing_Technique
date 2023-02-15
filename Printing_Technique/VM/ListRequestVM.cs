@@ -77,12 +77,20 @@ namespace Printing_Technique.VM
 
         private void DoDateSearch()
         {
-            Requests = DBInstance.GetInstance().Requests.Where(s => s.Data.CompareTo(StartSelect) >= 0 && s.Data.CompareTo(EndSelect) <= 0).ToList();
+            Requests = DBInstance.GetInstance().Requests.
+                Include(s => s.IdCrossNavigation).
+                Include(s => s.IdCrossNavigation.IdConsNavigation).
+                Include(s => s.IdCrossNavigation.IdTechNavigation).
+                Where(s => s.Data.CompareTo(StartSelect) >= 0 && s.Data.CompareTo(EndSelect) <= 0).ToList();
         }
 
         private void DoSearch()
         {
-            var serch = DBInstance.GetInstance().Requests.Where(s =>
+            var serch = DBInstance.GetInstance().Requests.
+                Include(s => s.IdCrossNavigation).
+                Include(s => s.IdCrossNavigation.IdConsNavigation).
+                Include(s => s.IdCrossNavigation.IdTechNavigation).
+                Where(s =>
 
            s.IdCrossNavigation.IdTechNavigation.Name.Contains(Search) ||
            s.IdCrossNavigation.IdTechNavigation.Category.Contains(Search) ||
@@ -96,8 +104,7 @@ namespace Printing_Technique.VM
 
         public ListRequestVM()
         {
-
-            Requests = DBInstance.GetInstance().Requests.Include(s => s.IdCrossNavigation.IdTechNavigation).Include(s => s.IdCrossNavigation.IdConsNavigation).ToList();
+            Load();
 
             EditRequest = new CustomCommand(() =>
             {
@@ -106,8 +113,16 @@ namespace Printing_Technique.VM
                     MessageBox.Show("Необходимо выбрать заявку!!!!!!!! ВЫ чёёёё дурак????????", "ОШИБКА", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 }
                 else
-                    new EditRequest_Window(SelectRequest).Show();
+                {
+                    new EditRequest_Window(SelectRequest).ShowDialog();
+                    Load();
+                }
             });
+        }
+
+        private void Load()
+        {
+            Requests = DBInstance.GetInstance().Requests.Include(s => s.IdCrossNavigation.IdTechNavigation).Include(s => s.IdCrossNavigation.IdConsNavigation).ToList();
         }
     }
 }

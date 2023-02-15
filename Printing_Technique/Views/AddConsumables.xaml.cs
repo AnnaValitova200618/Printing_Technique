@@ -23,7 +23,7 @@ namespace Printing_Technique.Views
         public AddConsumables(Models.Technic editTechnic)
         {
             InitializeComponent();
-            DataContext = new AddConsumablesVM(editTechnic, list);
+            DataContext = new AddConsumablesVM(editTechnic, list, ListSelected, window);
         }
     }
 }

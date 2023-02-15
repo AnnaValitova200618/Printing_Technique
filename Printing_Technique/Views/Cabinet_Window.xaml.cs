@@ -23,7 +23,7 @@ namespace Printing_Technique.Views
         public Cabinet_Window()
         {
             InitializeComponent();
-            DataContext = new CabinetWinVM();
+            DataContext = new CabinetWinVM(window);
         }
     }
 }

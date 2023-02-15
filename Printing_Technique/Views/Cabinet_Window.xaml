@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Printing_Technique.Views"
+        x:Name="window"
         mc:Ignorable="d"
         Title="Cabinet_Window" WindowStartupLocation="CenterScreen" Height="250" Width="400">
     <Grid>

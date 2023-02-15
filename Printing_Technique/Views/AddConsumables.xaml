@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Printing_Technique.Views"
         mc:Ignorable="d"
+        x:Name="window"
         Title="AddConsumables" Height="600" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +28,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Grid.Row="1" ItemsSource="{Binding SelectedCons}" Grid.Column="1" FontSize="16">
+        <ListView x:Name="ListSelected" Grid.Row="1" ItemsSource="{Binding SelectedCons}" Grid.Column="1" FontSize="16">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
@@ -35,6 +36,10 @@
             </ListView.View>
         </ListView>
         <Button Grid.Row="2" Content="Выбрать" FontSize="16" Width="100" Command="{Binding Select}"/>
-        <Button Grid.Row="2" Content="Сохранить" FontSize="16" Width="100" Grid.Column="1" Command="{Binding Save}"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button  Content="Сохранить" FontSize="16" Width="100" Command="{Binding Save}"/>
+            <Button  Content="Удалить из списка" FontSize="16" Command="{Binding Del}"/>
+        </StackPanel>
+        
     </Grid>
 </Window>

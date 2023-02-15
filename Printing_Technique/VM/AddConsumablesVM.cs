@@ -20,6 +20,7 @@ namespace Printing_Technique.VM
 
         public CustomCommand Save { get; set; }
         public CustomCommand Select { get; set; }
+        public CustomCommand Del { get; set; }
 
         public List<Consumable> Consumables
         {
@@ -43,7 +44,7 @@ namespace Printing_Technique.VM
 
 
 
-        public AddConsumablesVM(Technic editTechnic, System.Windows.Controls.ListView list)
+        public AddConsumablesVM(Technic editTechnic, System.Windows.Controls.ListView list, ListView listSelected, Window window)
         {
             SelectedCons = new ObservableCollection<Consumable>(DBInstance.GetInstance().CrossConsTeches.Where(s => s.IdTech == editTechnic.Id).Select(s=>s.IdConsNavigation));
             Consumables = DBInstance.GetInstance().Consumables.ToList();
@@ -66,6 +67,18 @@ namespace Printing_Technique.VM
                     DBInstance.GetInstance().SaveChanges();
                 });
                 MessageBox.Show("Оке");
+                window.Close();
+            });
+            Del = new CustomCommand(() =>
+            {
+                // костыль
+                var sssr = new ObservableCollection<Consumable>(SelectedCons);
+                foreach (Consumable d in listSelected.SelectedItems)
+                {
+                    if (sssr.Contains(d))
+                        sssr.Remove(d);
+                }
+                SelectedCons = sssr;
             });
         }
     }

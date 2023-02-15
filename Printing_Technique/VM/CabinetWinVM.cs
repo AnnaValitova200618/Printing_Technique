@@ -19,7 +19,7 @@ namespace Printing_Technique.VM
         public Department SelectedDepartment { get; set; }
         public Сabinet Cabinet { get => cabinet; set => cabinet = value; }
 
-        public CabinetWinVM()
+        public CabinetWinVM(Window window)
         {
             Departments = DBInstance.GetInstance().Departments.ToList();
             this.Cabinet = new Сabinet();
@@ -31,6 +31,7 @@ namespace Printing_Technique.VM
                 DBInstance.GetInstance().Сabinets.Add(Cabinet);
                 DBInstance.GetInstance().SaveChanges();
                 MessageBox.Show("Кабинет добавлен успешно!");
+                window.Close();
             });
         }
     }

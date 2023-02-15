@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Printing_Technique.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Printing_Technique.Views
         public EditRequest_Window(Models.Request selectRequest)
         {
             InitializeComponent();
+            DataContext = new EditRequestVM(selectRequest, window);
         }
     }
 }

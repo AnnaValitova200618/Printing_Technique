@@ -51,7 +51,9 @@ namespace Printing_Technique.VM
             set
             {
                 selectedTechnic = value;
-                Consumables = DBInstance.GetInstance().Consumables.Where(s => s.CrossConsTeches.FirstOrDefault(d => d.IdTechNavigation == SelectedTechnic) != null).ToList();
+                Consumables = DBInstance.GetInstance().CrossConsTeches.
+                    Where(d => d.IdTechNavigation == SelectedTechnic).
+                    Select(s=>s.IdConsNavigation).ToList();
                 SignalChanged(nameof(Consumables));
             }
         }

@@ -5,11 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Printing_Technique.Views"
         mc:Ignorable="d"
-        Title="EditRequest" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        x:Name="window"
+        Title="Редактирование заявки" Height="550" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel HorizontalAlignment="Center">
-            <Label/>
-            <TextBox/>
+        <StackPanel VerticalAlignment="Center">
+            <Label Content="Наименование техники" FontSize="18"/>
+            <ComboBox FontSize="18" SelectedItem="{Binding SelectedTechnic}" ItemsSource="{Binding Technics}" DisplayMemberPath="Name"/>
+            <Label Content="Категория техники" FontSize="18"/>
+            <TextBox FontSize="18" Text="{Binding SelectedTechnic.Category}" IsReadOnly="True"/>
+            <Label Content="Наименование расходного материала" FontSize="18"/>
+            <ComboBox FontSize="18" SelectedItem="{Binding SelectedConsumable}" ItemsSource="{Binding Consumables}" DisplayMemberPath="Name"/>
+            <Label Content="Дата заявки" FontSize="18"/>
+            <DatePicker FontSize="18" SelectedDate="{Binding EditRequest.Data}"/>
+            <Label Content="Цена" FontSize="18"/>
+            <TextBox FontSize="18" Text="{Binding EditRequest.Price, StringFormat={}{0:00}}"/>
         </StackPanel>
+        <Button Content="Сохранить" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Command="{Binding Save}"/>
     </Grid>
 </Window>

@@ -63,6 +63,7 @@ namespace Printing_Technique.VM
         public Request_WindowVM(Action close)
         {
             Technics = DBInstance.GetInstance().Technics.ToList();
+
             Save = new CustomCommand(() =>
             {
                 if (SelectedTechnic != null && SelectedConsumable != null)
